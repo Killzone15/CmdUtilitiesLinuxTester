@@ -9,6 +9,8 @@ class BaseUtility:
     def run_command(command):
         """Запускает команду через subprocess и возвращает вывод."""
         result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode != 0:  # Если команда завершилась с ошибкой
+            return ''  # Можно вернуть пустую строку или обработать ошибку
         return result.stdout
 
     def file_exists(self):

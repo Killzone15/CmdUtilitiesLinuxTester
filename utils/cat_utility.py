@@ -1,16 +1,23 @@
 import os
 from utils.base_utility import BaseUtility
 
-
 class CatUtility(BaseUtility):
-    def __init__(self, path='.'):
-        super().__init__(path)
-
-    def display_file(self):
-        """Отображает содержимое файла, если он существует."""
+    def display_file(self, options=None):
+        """Отображает содержимое файла, если он существует, с учетом опций."""
         if self.file_exists() and os.path.isfile(self.path):
-            command = ['cat', self.path]
-            output = self.run_command(command)
-            print(output)
+            with open(self.path, 'r') as f:
+                lines = f.readlines()
+
+            if options is not None:
+                if '-n' in options:
+                    output = ''.join(f"{i + 1:5}\t{line}" for i, line in enumerate(lines))
+                elif '-b' in options:
+                    output = ''.join(f"{i + 1:5}\t{line}" if line.strip() else line for i, line in enumerate(lines))
+                else:
+                    output = ''.join(lines)
+            else:
+                output = ''.join(lines)
+
+            print(output, end='')  # Убедитесь, что не добавляется лишний \n
         else:
             print(f"Файл {self.path} не существует или не является файлом.")
