@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest
+.pytest_cache/
+.coverage
+coverage.xml
+*.cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Пакеты
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+.env
+.env.local
+
+# Директории сборки
+build/
+dist/
+
+# Установленные пакеты
+*.egg-info/
+*.egg
+.idea/
